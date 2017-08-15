@@ -1,9 +1,28 @@
 #!~/envs/python3/udacity_python_mongodb
 
 import os
+import pprint
+import csv
 
 DATADIR = ""
 DATAFILE = "datasets/beatles-diskography.csv"
+
+
+def parse_csv(datafile):
+    data = []
+    n = 0
+    with open(datafile, 'r') as sd:
+        r = csv.DictReader(sd)
+        for line in r:
+            data.append(line)
+    return data
+
+
+if __name__ == '__main__':
+    datafile = os.path.join(DATADIR, DATAFILE)
+    parse_csv(datafile)
+    d = parse_csv(datafile)
+    pprint.pprint(d)
 
 
 def parse_file(datafile):
@@ -41,5 +60,4 @@ def test():
     assert d[0] == firstline
     assert d[9] == tenthline
 
-
-test()
+# test()
