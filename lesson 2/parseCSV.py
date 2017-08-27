@@ -10,8 +10,11 @@ DATAFILE = "datasets/745090.csv"
 def parse_file(datafile):
     name = ""
     data = []
-    with open(datafile, 'rb') as f:
-        pass
+    with open(datafile, 'r') as f:
+        name = f.readline().split(',')
+        name = name[1].strip('"')
+        for line in f:
+            data = list(csv.reader(f, delimiter=','))
     # Do not change the line below
     return name, data
 
