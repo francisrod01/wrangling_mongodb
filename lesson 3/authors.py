@@ -19,7 +19,13 @@ def get_authors(root):
             "email": None
         }
 
-        # YOUR CODE HERE
+        fnm = author.find('./fnm').text
+        snm = author.find('./snm').text
+        email = author.find('./email').text
+
+        data["fnm"] = fnm
+        data["snm"] = snm
+        data["email"] = email
 
         authors.append(data)
 
