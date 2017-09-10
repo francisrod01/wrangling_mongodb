@@ -25,8 +25,16 @@ def extract_carriers(page):
     data = []
 
     with open(page, "r") as html:
-        # do something here to find the necessary values
+        # Find the necessary values
         soup = BeautifulSoup(html, "lxml")
+
+        carrier_list = soup.select("select#CarrierList > option")
+
+        for carrier in carrier_list:
+            if carrier["value"].startswith("All"):
+                del carrier["value"]
+            else:
+                data.append(carrier["value"])
 
     return data
 
