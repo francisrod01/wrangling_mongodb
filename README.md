@@ -21,8 +21,10 @@ Font's material:
 * [XML - Example research article](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58be1c65_exampleresearcharticle/exampleresearcharticle.xml)
 * [XML - XPath Syntax](https://www.w3schools.com/xml/xpath_syntax.asp)
 * [The Element Tree XML API](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree)
+* [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 
 Database's fonts:
 * [National Solar Radiation Data Base](http://rredc.nrel.gov/solar/old_data/nsrdb/1991-2005/tmy3/by_USAFN.html)
 * [NYTimes Developer Documentation for the Most Popular API](http://developer.nytimes.com/)
+* [Air Trans website](https://www.transtats.bts.gov/Data_Elements.aspx?Data=2)

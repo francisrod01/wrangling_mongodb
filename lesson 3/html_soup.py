@@ -19,8 +19,17 @@ def extract_data(page):
     data = {"eventvalidation": "",
             "viewstate": ""}
     with open(page, "r") as html:
-        # do something here to find the necessary values
-        pass
+        # Find the necessary values
+        ## soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, 'html.parser')
+
+        eventvalidation = soup.find('input', id='__EVENTVALIDATION')
+        viewstate = soup.find('input', id='__VIEWSTATE')
+
+        data["eventvalidation"] = eventvalidation.get('value')
+        data["viewstate"] = viewstate.get('value')
+        ## data["eventvalidation"] = eventvalidation["value"]
+        ## data["viewstate"] = viewstate["value"]
 
     return data
 
