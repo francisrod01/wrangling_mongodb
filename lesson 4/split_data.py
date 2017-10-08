@@ -27,7 +27,17 @@ def split_file(filename):
     "{}-{}".format(filename, n) where n is a counter, starting from 0.
     """
 
-    pass
+    with open(filename, "r") as f:
+        splitxml = f.read().split("</us-patent-grant>")
+        n = 0
+
+        for xml_content in splitxml:
+            with open("{}-{}".format(filename, n), "w") as xml_file:
+                if len(xml_content) > 1:
+                    xml_file.write(xml_content.strip())
+                    n = n + 1
+                else:
+                    pass
 
 
 def test():
