@@ -22,25 +22,52 @@ You can write helper functions for checking the data and writing the files, but 
 import csv
 import pprint
 
-INPUT_FILE = 'autos.csv'
-OUTPUT_GOOD = 'autos-valid.csv'
-OUTPUT_BAD = 'FIXME-autos.csv'
+DIR_DATA = 'datasets/'
+INPUT_FILE = DIR_DATA + 'autos.csv'
+OUTPUT_GOOD = DIR_DATA + 'autos-valid.csv'
+OUTPUT_BAD = DIR_DATA + 'FIXME-autos.csv'
 
 
 def process_file(input_file, output_good, output_bad):
+    # Store data into lists for output.
+    data_good = []
+    data_bad = []
+
     with open(input_file, 'r') as f:
         reader = csv.DictReader(f)
         header = reader.fieldnames
 
-        # COMPLETE THIS FUNCTION
-        ###
+        for row in reader:
+            # Validate URI value.
+            if row['URI'].find("dbpedia.org") < 0:
+                continue
 
-    # This is just an example on how you can use csv.DictWriter
-    # Remember that you have to output 2 files
-    with open(output_good, "w") as g:
-        writer = csv.DictWriter(g, delimiter=",", fieldnames=header)
+            # Catch first 4 characters of string.
+            ps_year = row['productionStartYear'][:4]
+
+            try:  # Use try/except to filter valid items.
+                ps_year = int(ps_year)
+                row['productionStartYear'] = ps_year
+                # Check date interval.
+                if (ps_year >= 1886) and (ps_year <= 2014):
+                    data_good.append(row)
+                else:
+                    data_bad.append(row)
+            except ValueError:  # Non-numeric string caught by exception.
+                if ps_year == 'NULL':
+                    data_bad.append(row)
+
+    # Write processed data to output files.
+    with open(output_good, "w") as good:
+        writer = csv.DictWriter(good, delimiter=",", fieldnames=header)
         writer.writeheader()
-        for row in YOURDATA:
+        for row in data_good:
+            writer.writerow(row)
+
+    with open(output_bad, "w") as bad:
+        writer = csv.DictWriter(bad, delimiter=",", fieldnames=header)
+        writer.writeheader()
+        for row in data_bad:
             writer.writerow(row)
 
 

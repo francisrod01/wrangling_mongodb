@@ -1,1 +1,4 @@
 .idea/
+
+lesson 5/datasets/autos-*.csv
+lesson 5/datasets/*-autos.csv
