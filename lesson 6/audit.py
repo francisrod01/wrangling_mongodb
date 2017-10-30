@@ -41,14 +41,71 @@ FIELDS = [
     "name", "timeZone_label", "utcOffset", "homepage", "governmentType_label",
     "isPartOf_label", "areaCode", "populationTotal", "elevation",
     "maximumElevation", "minimumElevation", "populationDensity",
-    "wgs84_pos#lat", "wgs84_post#long", "areaLand", "areaMetro", "areaUrban"
+    "wgs84_pos#lat", "wgs84_pos#long", "areaLand", "areaMetro", "areaUrban"
 ]
+
+
+def is_int(item):
+    try:
+        int(item)
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
+def is_float(item):
+    try:
+        float(item)
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
+def is_list(item):
+    try:
+        check = item.startswith("{")
+        return check
+    except (TypeError, ValueError):
+        return False
+
+
+def is_none_type(item):
+    if item in ("NULL", "", None):
+        return True
+
+    return False
 
 
 def audit_file(filename, fields):
     fieldtypes = {}
+    none_type = type(None)
+    int_type = type(1)
+    list_type = type([])
+    float_type = type(1.1)
 
-    # YOUR CODE HERE
+    for field in fields:
+        fieldtypes[field] = set()
+
+    with open(filename, 'r') as f:
+        cities = csv.DictReader(f)  # this is a dictionary
+        header = cities.fieldnames
+
+        for (i, row) in enumerate(cities):
+            # Skip the first 3 rows
+            if 'dbpedia.org' not in row['URI']:
+                continue
+
+            for item in fieldtypes:
+                if is_int(row.get(item)):
+                    fieldtypes[item].add(int_type)
+                elif is_float(row.get(item)):
+                    fieldtypes[item].add(float_type)
+                elif is_none_type(row.get(item)):
+                    fieldtypes[item].add(none_type)
+                elif is_list(row.get(item)):
+                    fieldtypes[item].add(list_type)
+                else:
+                    fieldtypes[item].add(type(row.get(item)))
 
     return fieldtypes
 
