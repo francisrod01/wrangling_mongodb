@@ -29,10 +29,45 @@ DIR_DATA = 'datasets/'
 CITIES_DATA = DIR_DATA + 'cities.csv'
 
 
-def check_loc(point, lat, longi):
-    # YOUR CODE HERE
+def test_if_int(text):
+    try:
+        a = int(text)
+        return True
+    except ValueError:
+        return False
 
-    pass
+
+def test_if_float(text):
+    try:
+        a = float(text)
+        if test_if_int(text):
+            return False
+        else:
+            return True
+    except ValueError:
+        return False
+
+
+def check_loc(point, lat, longi):
+    result = False
+
+    if test_if_float(lat):
+        lat = float(lat)
+
+    if test_if_float(longi):
+        longi = float(longi)
+
+    point = point.split(' ')
+    for point_value in point:
+        if test_if_float(point_value):
+            point_value = float(point_value)
+
+            if point_value == lat:
+                result = True
+            if point_value == longi:
+                result = True
+
+    return result
 
 
 def process_file(filename):
