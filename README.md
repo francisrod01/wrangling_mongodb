@@ -22,6 +22,12 @@ Font's material:
 * [XML - XPath Syntax](https://www.w3schools.com/xml/xpath_syntax.asp)
 * [The Element Tree XML API](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree)
 * [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* [Installing additional Modules in Python](https://www.udacity.com/wiki/ud032#installing-additional-modules-in-python)
+
+
+Python dictionaries:
+* [Python dictionaries](https://docs.python.org/2/tutorial/datastructures.html#dictionaries)
+* [PyMongo installation instructions](http://api.mongodb.org/python/current/installation.html)
 
 
 Database's fonts:
@@ -29,3 +35,5 @@ Database's fonts:
 * [NYTimes Developer Documentation for the Most Popular API](http://developer.nytimes.com/)
 * [Air Trans website](https://www.transtats.bts.gov/Data_Elements.aspx?Data=2)
 * [Metro extracts](https://mapzen.com/data/metro-extracts/)
+* [MongoDB installation instructions](http://docs.mongodb.org/manual/installation/)
+    + [Drivers and client libraries](http://docs.mongodb.org/manual/applications/drivers/)
