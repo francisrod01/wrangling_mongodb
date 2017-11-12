@@ -37,3 +37,4 @@ Database's fonts:
 * [Metro extracts](https://mapzen.com/data/metro-extracts/)
 * [MongoDB installation instructions](http://docs.mongodb.org/manual/installation/)
     + [Drivers and client libraries](http://docs.mongodb.org/manual/applications/drivers/)
+    + [Using Mongoimport](http://docs.mongodb.org/manual/reference/program/mongoimport/)
