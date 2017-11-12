@@ -8,6 +8,7 @@ example in the previous video.
 """
 
 from autos import process_file
+import pprint
 
 DIR_DATA = "datasets/"
 AUTOS_DATA = DIR_DATA + "autos-small.csv"
@@ -15,7 +16,9 @@ AUTOS_DATA = DIR_DATA + "autos-small.csv"
 
 def insert_autos(infile, db):
     data = process_file(infile)
-    # Add your here. Insert the data in one command.
+    # Insert the data in one command.
+    # pprint.pprint(data)
+    db.autos.insert(data)
 
 
 if __name__ == "__main__":
@@ -25,4 +28,4 @@ if __name__ == "__main__":
     db = client.examples
 
     insert_autos(AUTOS_DATA, db)
-    print(db.autos.find_one())
+    pprint.pprint(db.autos.find_one())
