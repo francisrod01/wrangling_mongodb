@@ -19,14 +19,39 @@ import csv
 import json
 import pprint
 
+import re
+
 DIR_DATA = 'datasets/'
 CITIES_DATA = DIR_DATA + 'cities.csv'
 
 
-def fix_area(area):
-    # YOUR CODE HERE
+def test_if_int(text):
+    try:
+        a = int(text)
+        return True
+    except ValueError:
+        return False
 
-    return area
+
+def test_if_float(text):
+    try:
+        a = float(text)
+        if test_if_int(text):
+            return False
+        else:
+            return True
+    except ValueError:
+        return False
+
+
+def fix_area(area):
+    if test_if_float(area):
+        return float(area)
+    elif re.match(r'^{', area):
+        values = area.strip('{,}').split('|')
+        return float(max(values, key=len))
+    else:
+        return None
 
 
 def process_file(filename):
@@ -57,7 +82,7 @@ def test():
     for n in range(5, 8):
         pprint.pprint(data[n]["areaLand"])
 
-    assert data[3]["areaLand"] == None
+    assert data[3]["areaLand"] is None
     assert data[8]["areaLand"] == 55166700.0
     assert data[20]["areaLand"] == 14581600.0
     assert data[33]["areaLand"] == 20564500.0
