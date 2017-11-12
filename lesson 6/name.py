@@ -18,15 +18,20 @@ The rest of the code is just an example on how this function can be used.
 import codecs
 import csv
 import pprint
+import re
 
 DIR_DATA = 'datasets/'
 CITIES_DATA = DIR_DATA + 'cities.csv'
 
 
 def fix_name(name):
-    # YOUR CODE HERE
-
-    return name
+    if re.match(r'^{', name):
+        values = name.strip('{,}').split('|')
+        return values
+    elif name == 'NULL':
+        return []
+    else:
+        return [name]
 
 
 def process_file(filename):
