@@ -23,12 +23,18 @@ Font's material:
 * [The Element Tree XML API](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree)
 * [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 * [Installing additional Modules in Python](https://www.udacity.com/wiki/ud032#installing-additional-modules-in-python)
+* Live RegEx tester at [regexpal.com](http://regexpal.com)
 
 
 Python dictionaries:
 * [Python dictionaries](https://docs.python.org/2/tutorial/datastructures.html#dictionaries)
 * [PyMongo installation instructions](http://api.mongodb.org/python/current/installation.html)
     + [cursor - Tools for iterating over MongoDB query results](http://api.mongodb.com/python/current/api/pymongo/cursor.html)
+* Official Python [Regular Expression HOWTO](https://docs.python.org/3/howto/regex.html)
+* Another good [Python Regular Expressions][1] page
+
+[1]: https://developers.google.com/edu/python/regular-expressions?csw=1
+
 
 Database's fonts:
 * [National Solar Radiation Data Base](http://rredc.nrel.gov/solar/old_data/nsrdb/1991-2005/tmy3/by_USAFN.html)
@@ -39,3 +45,4 @@ Database's fonts:
     + [Drivers and client libraries](http://docs.mongodb.org/manual/applications/drivers/)
     + [Using Mongoimport](http://docs.mongodb.org/manual/reference/program/mongoimport/)
     + [Query and Projection Operators](https://docs.mongodb.com/manual/reference/operator/query/)
+    + [$regex manual](http://docs.mongodb.org/manual/reference/operator/query/regex/)
