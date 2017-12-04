@@ -14,7 +14,10 @@ For instructions related to MongoDB setup and datasets please see Course Materia
 
 def in_query():
     # Modify the below line with your query; try to use $in operator.
-    query = {}
+    query = {
+        "manufacturer": "Ford Motor Company",
+        "assembly": {"$in": ['Germany', 'United Kingdom', 'Japan']}
+    }
     return query
 
 
