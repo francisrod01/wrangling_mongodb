@@ -75,10 +75,42 @@ def process_file(filename, fields):
             l = next(reader)
 
         for line in reader:
-            # YOUR CODE HERE.
-            pass
+            entry = {
+                'label': label_fix(line['rdf-schema#label']),
+                'uri': is_null(line['URI']),
+                'description': is_null(line['rdf-schema#comment']),
+                'name': name_check(line['name'], label_fix(line['rdf-schema#label'])),
+                'synonym': parse_array(line['synonym']),
+                'classification': {
+                    'family': is_null(line['family_label']),
+                    'class': is_null(line['class_label']),
+                    'phylum': is_null(line['phylum_label']),
+                    'order': is_null(line['order_label']),
+                    'kingdom': is_null(line['kingdom_label']),
+                    'genus': is_null(line['genus_label']),
+                }
+            }
+            data.append(entry)
 
     return data
+
+
+def label_fix(l):
+    return re.sub("[\(\[].*?[\)\]]", "", l).strip()
+
+
+def name_check(n, l):
+    if n == "NULL" or not n.isalpha():
+        return l.strip()
+    else:
+        return n.strip()
+
+
+def is_null(z):
+    if z == "NULL":
+        return None
+    else:
+        return z.strip()
 
 
 def parse_array(v):
@@ -88,6 +120,8 @@ def parse_array(v):
         v_array = v.split("|")
         v_array = [i.strip() for i in v_array]
         return v_array
+    if v == "NULL":
+        return None
     return [v]
 
 
@@ -108,7 +142,7 @@ def test():
         },
         "uri": "http://dbpedia.org/resource/Argiope_(spider)",
         "label": "Argiope",
-        "description": "The genus Argiope includes rather large and spectacular spiders that often... ",
+        "description": "The genus Argiope includes rather large and spectacular spiders that often have a strikingly coloured abdomen. These spiders are distributed throughout the world. Most countries in tropical or temperate climates host one or more species that are similar in appearance. The etymology of the name is from a Greek name meaning silver-faced.",
     }
 
     assert len(data) == 76
