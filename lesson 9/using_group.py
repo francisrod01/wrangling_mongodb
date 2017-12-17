@@ -3,8 +3,9 @@
 """
 The tweets in our twitter collection have a field called "source". This field describes the application
 that was used to create the tweet. Following the examples for using the $group operator, your task is
-to modify the 'make-pipeline' function to identify most used applications for creating tweets.
-As a check on your query, 'web' is listed as the most frequently used application,
+to modify the 'make_pipeline' function to identify most used applications for creating tweets.
+As a check on your query, 'web' is listed as the most frequently used application.
+'Ubertwitter' is the second most used. The number of counts should be stored in a field name 'count'
 (see the assertion at the end of the script).
 
 Please modify only the 'make_pipeline' function so that it creates and returns an aggregation pipeline
@@ -33,7 +34,17 @@ def get_db(db_name):
 
 def make_pipeline():
     # complete the aggregation pipeline
-    pipeline = []
+    pipeline = [
+        {
+            "$group": {
+                "_id": "$source",
+                "count": {"$sum": 1}
+            }
+        },
+        {
+            "$sort": {"count": -1}
+        }
+    ]
     return pipeline
 
 
