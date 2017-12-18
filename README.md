@@ -46,5 +46,6 @@ Database's fonts:
     + [Using Mongoimport](http://docs.mongodb.org/manual/reference/program/mongoimport/)
     + [Query and Projection Operators](https://docs.mongodb.com/manual/reference/operator/query/)
     + [$regex manual](http://docs.mongodb.org/manual/reference/operator/query/regex/)
-    + [$group aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/group/)
-    + [$project aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/project/#pipe._S_project)
+    + [Aggregation Framework Operator doc](http://docs.mongodb.org/manual/reference/operator/aggregation/)
+        * [$group aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/group/)
+        * [$project aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/project/#pipe._S_project)

@@ -3,7 +3,7 @@
 """
 Write an aggregation query to answer this question:
 
-Of the users in the "Brasilia" timezone who have tweeted 100 times or more,
+Of the users in the "Brasilia" time zone who have tweeted 100 times or more,
 who has the largest number of followers?
 
 The following hints will help you solve this problem:
@@ -48,8 +48,29 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # complete the aggregation pipeline
-    pipeline = []
+    pipeline = [
+        {
+            "$match": {
+                "user.statuses_count": {"$gte": 100},
+                "user.time_zone": "Brasilia",
+            },
+        },
+        {
+            "$project": {
+                "_id": 0,
+                "followers": "$user.followers_count",
+                "tweets": "$user.statuses_count",
+                "time_zone": "$user.time_zone",
+                "screen_name": "$user.screen_name",
+            },
+        },
+        {
+            "$sort": {"followers": -1},
+        },
+        {
+            "$limit": 1,
+        },
+    ]
     return pipeline
 
 
