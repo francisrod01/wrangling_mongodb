@@ -38,8 +38,37 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # Complete the aggregation pipeline.
-    pipeline = []
+    pipeline = [
+        {
+            "$unwind": "$isPartOf"
+        },
+        {
+            "$match": {
+                "$and": [
+                    {"country": "India"},
+                    {"population": {"$gte": 0}}
+                ]
+            }
+        },
+        {
+            "$group": {
+                "_id": "$isPartOf",
+                "avgCity": {"$avg": "$population"}
+            }
+        },
+        {
+            "$group": {
+                "_id": "AllCities",
+                "avg": {"$avg": "$avgCity"}
+            }
+        },
+        {
+            "$sort": {"count": -1}
+        },
+        {
+            "$limit": 1
+        }
+    ]
     return pipeline
 
 
@@ -59,3 +88,6 @@ if __name__ == '__main__':
     import pprint
 
     pprint.pprint(result)
+
+    # output:
+    # [{u'_id': u'AllCities', u'avg': 201128.02415469187}]
