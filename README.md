@@ -9,6 +9,10 @@ Course's material:
 * [Course Resources](https://www.udacity.com/wiki/ud032#course-resources)
 * [Discussion Forum](https://discussions.udacity.com/c/standalone-courses/data-wrangling-with-mongodb)
 
+Course discussions:
+
+* [Using $push](https://discussions.udacity.com/t/using-push/121851)
+
 Font's material:
 
 * [Built-in Types](https://docs.python.org/3/library/stdtypes.html)
@@ -47,6 +51,7 @@ Database's fonts:
     + [Query and Projection Operators](https://docs.mongodb.com/manual/reference/operator/query/)
     + [$regex manual](http://docs.mongodb.org/manual/reference/operator/query/regex/)
     + [Aggregation Framework Operator doc](http://docs.mongodb.org/manual/reference/operator/aggregation/)
+        * [$match aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/match/)
         * [$group aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/group/)
         * [$project aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/project/#pipe._S_project)
         * [$unwind aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/#pipe._S_unwind)

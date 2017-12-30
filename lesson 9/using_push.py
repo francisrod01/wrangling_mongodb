@@ -35,8 +35,26 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # Complete the aggregation pipeline.
-    pipeline = []
+    pipeline = [
+        {
+            "$match": {
+                "user.statuses_count": {"$gte": 0}
+            }
+        },
+        {
+            "$group": {
+                "_id": "$user.screen_name",
+                "count": {"$sum": 1},
+                "tweet_texts": {"$push": "$text"}
+            }
+        },
+        {
+            "$sort": {"count": -1}
+        },
+        {
+            "$limit": 5
+        }
+    ]
     return pipeline
 
 
