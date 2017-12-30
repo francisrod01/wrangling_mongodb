@@ -4,6 +4,16 @@ Udacity Data Wrangling with MongoDB course lessons
 
 Author: [Francis Rodrigues](https://github.com/francisrod01)
 
+
+### Questions ###
+
+* Can I import a file to my MongoDB instance?
+
+```commandline
+mongoimport -d mydb -c things --type csv --file locations.csv --headerline
+```
+
+
 Course's material:
 
 * [Course Resources](https://www.udacity.com/wiki/ud032#course-resources)
