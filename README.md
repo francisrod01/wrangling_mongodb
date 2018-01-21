@@ -62,6 +62,7 @@ Database's fonts:
     + [$regex manual](http://docs.mongodb.org/manual/reference/operator/query/regex/)
     + [Aggregation Framework Operator doc](http://docs.mongodb.org/manual/reference/operator/aggregation/)
         * [$match aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/match/)
+        * [$elementMatch (query)](https://docs.mongodb.com/manual/reference/operator/query/elemMatch/)
         * [$group aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/group/)
         * [$project aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/project/#pipe._S_project)
         * [$unwind aggregation](https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/#pipe._S_unwind)

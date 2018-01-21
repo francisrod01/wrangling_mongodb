@@ -18,6 +18,13 @@ datasets please see Course Materials.
 Please note that the dataset you are using here is a different version of the
 cities collection provided in the course materials, if you attempt some of the
 same queries that we look at in the problem set, your results may be different.
+
+NOTE - If you have to match multiple criteria on a single field, you will need
+to put both conditions in the same dictionary, e.g.
+
+{"$match": {'field': {'$cond1': val1, '$cond2': val2}...}}
+
+NOTE - See the example document in lesson9/datasets/example_india_city.txt
 """
 
 
@@ -29,8 +36,30 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # Complete the aggregation pipeline
-    pipeline = []
+    pipeline = [
+        {
+            "$unwind": "$isPartOf",
+        },
+        {
+            "$match": {
+                "lon": {"$gt": 75, "$lt": 80},
+                "name": {"$ne": None},
+                "country": "India",
+            },
+        },
+        {
+            "$group": {
+                "_id": "$isPartOf",
+                "count": {"$sum": 1},
+            },
+        },
+        {
+            "$sort": {"count": -1},
+        },
+        {
+            "$limit": 1
+        }
+    ]
     return pipeline
 
 
