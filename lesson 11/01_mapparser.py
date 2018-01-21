@@ -12,16 +12,24 @@ Note that your code will be tested with a different data file than the 'example.
 """
 
 import xml.etree.cElementTree as ET
+from collections import defaultdict
 import pprint
+
+# Global variables
+dataset_dir = 'datasets/'
+dataset_file = dataset_dir + 'example.osm'
 
 
 def count_tags(filename):
-    # YOUR CODE HERE
-    pass
+    tags = defaultdict(int)
+    for (event, element) in ET.iterparse(filename):
+        tags[element.tag] += 1
+    return tags
 
 
 def test():
-    tags = count_tags('example.osm')
+    tags = count_tags(dataset_file)
+    pprint.pprint(tags)
     assert tags == {
         'bounds': 1,
         'member': 3,
