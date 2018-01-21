@@ -28,6 +28,9 @@ datasets please see Course Materials.
 Please note that the dataset you are using here is a different version of the
 cities collection provided in the course materials. If you attempt some of the
 same queries that we look at in the problem set, your results may be different.
+
+NOTE - See the example document in lesson9/datasets/example_india_city.txt file.
+     - See the output in lesson10/datasets/average_population_output.txt file.
 """
 
 
@@ -39,8 +42,34 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # Complete the aggregation pipeline.
-    pipeline = []
+    pipeline = [
+        {
+            "$match": {
+                "country": {"$ne": None},
+            },
+        },
+        {
+            "$unwind": "$isPartOf",
+        },
+        {
+            "$group": {
+                "_id": {
+                    "country": "$country",
+                    "region": "$isPartOf"
+                },
+                "avgRegion": {"$avg": "$population"},
+            },
+        },
+        {
+            "$group": {
+                "_id": "$_id.country",
+                "avgRegionalPopulation": {"$avg": "$avgRegion"},
+            },
+        },
+        {
+            "$sort": {"avgRegionalPopulation": -1}
+        },
+    ]
     return pipeline
 
 
