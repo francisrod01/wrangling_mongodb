@@ -38,6 +38,7 @@ Font's material:
 * [Beautiful Soup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 * [Installing additional Modules in Python](https://www.udacity.com/wiki/ud032#installing-additional-modules-in-python)
 * Live RegEx tester at [regexpal.com](http://regexpal.com)
+* OpenStreetMap [OSM XML](https://wiki.openstreetmap.org/wiki/OSM_XML)
 
 
 Python dictionaries:
