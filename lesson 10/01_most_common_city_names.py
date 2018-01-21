@@ -29,6 +29,8 @@ datasets please see Course Materials.
 Please note that the dataset you are using here is a different version of the
 cities collection provided in the course materials. If you attempt some of the
 same queries that we look at in the problem set, your results may be different.
+
+NOTE - See the example document in lesson9/datasets/example_india_city.txt
 """
 
 
@@ -40,8 +42,24 @@ def get_db(db_name):
 
 
 def make_pipeline():
-    # Complete the aggregation pipeline
-    pipeline = []
+    pipeline = [
+        {
+            "$group": {
+                "_id": "$name",
+                "count": {
+                    "$sum": {
+                        "$cond": [{"$eq": [{"$ifNull": ["$name", ""]}, ""]}, 0, 1]
+                    }
+                }
+            }
+        },
+        {
+            "$sort": {"count": -1}
+        },
+        {
+            "$limit": 1
+        }
+    ]
     return pipeline
 
 
