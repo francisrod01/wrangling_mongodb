@@ -23,9 +23,9 @@
  </node>
  <node id="261198953" visible="true" version="6" changeset="8581395" timestamp="2011-06-29T14:14:13Z" user="bbmiller" uid="451048" lat="41.9707413" lon="-87.6963097"/>
  <node id="757860928" visible="true" version="2" changeset="5288876" timestamp="2010-07-22T16:16:51Z" user="uboot" uid="26299" lat="41.9747374" lon="-87.6920102">
-  <tag k="amenity" v="fast_food"/>
+  <tag k="amenity?" v="fast_food"/>
   <tag k="cuisine" v="sausage"/>
-  <tag k="name" v="Shelly's Tasty Freeze"/>
+  <tag k="NAME" v="Shelly's Tasty Freeze"/>
  </node>
   <way id="258219703" visible="true" version="1" changeset="20187382" timestamp="2014-01-25T02:01:54Z" user="linuxUser16" uid="1219059">
   <nd ref="2636086179"/>

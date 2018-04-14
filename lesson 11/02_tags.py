@@ -20,6 +20,7 @@ import re
 # Global variables
 dataset_dir = 'datasets/'
 dataset_file = dataset_dir + 'example.osm'
+
 lower = re.compile(r'^([a-z]|_)*$')
 lower_colon = re.compile(r'^([a-z]|_)*:([a-z]|_)*S')
 problem_chars = re.compile(r'[=\+/&<>;\'"\?%#$@\,\. \t\r\n]')
@@ -27,8 +28,28 @@ problem_chars = re.compile(r'[=\+/&<>;\'"\?%#$@\,\. \t\r\n]')
 
 def key_type(element, keys):
     if element.tag == "tag":
-        # YOUR CODE HERE
-        pass
+        my_k = element.get('k')
+
+        if problem_chars.search(my_k):
+            if 'problem_chars' in keys:
+                keys['problem_chars'] += 1
+            else:
+                keys['problem_chars'] = 1
+
+        elif lower_colon.search(my_k):
+            if 'lower_colon' in keys:
+                keys['lower_colon'] += 1
+            else:
+                keys['lower_colon'] = 1
+
+        elif lower.search(my_k):
+            if 'lower' in keys:
+                keys['lower'] += 1
+            else:
+                keys['lower'] = 1
+
+        else:
+            keys['other'] += 1
 
     return keys
 
