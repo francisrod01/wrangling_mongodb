@@ -17,14 +17,19 @@ dataset_dir = 'datasets/'
 dataset_file = dataset_dir + 'example.osm'
 
 
-def get_user(element):
-    return
+def get_user(element, users):
+    if element.tag == "node":
+        uid = element.get('user')
+        if uid not in users:
+            users.add(uid)
+
+    return users
 
 
 def process_map(filename):
     users = set()
     for _, element in et.iterparse(filename):
-        pass
+        users = get_user(element, users)
 
     return users
 
