@@ -42,6 +42,7 @@ Font's material:
 
 
 Python dictionaries:
+* [Python Doc - Default Dictionaries](https://docs.python.org/2/library/collections.html#collections.defaultdict)
 * [Python dictionaries](https://docs.python.org/2/tutorial/datastructures.html#dictionaries)
 * [PyMongo installation instructions](http://api.mongodb.org/python/current/installation.html)
     + [cursor - Tools for iterating over MongoDB query results](http://api.mongodb.com/python/current/api/pymongo/cursor.html)
