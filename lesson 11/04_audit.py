@@ -19,7 +19,7 @@ import pprint
 
 # Global variables
 dataset_dir = 'datasets/'
-dataset_file = dataset_dir + 'example.osm'
+dataset_file = dataset_dir + 'example2.osm'
 street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 
 expected = [
@@ -27,10 +27,53 @@ expected = [
     "Trail", "Parkway", "Commons"
 ]
 
-# UPDATE THIS VARIABLE
 mapping = {
+    "AVE": "Avenue",
+    "Ave": "Avenue",
+    "Ave.": "Avenue",
+    "Av.": "Avenue",
+    "ave": "Avenue",
+    "Blvd": "Boulevard",
+    "Blvd.": "Boulevard",
+    "boulevard": "Boulevard",
+    "CT": "Court",
+    "Ct": "Court",
+    "Dr": "Drive",
+    "Dr.": "Drive",
+    "E": "East",
+    "E.Division": "East Division",
+    "FI": "Fox Drive",
+    "Hwy": "Highway",
+    "K10": "NE 8th Street",
+    "MainStreet": "N Main Street",
+    "N": "North",
+    "NE": "Northeast",
+    "NW": "Northwest",
+    "nw": "Northwest",
+    "PL": "Place",
+    "Pl": "Place",
+    "Rd": "Road",
+    "RD": "Road",
+    "Rd.": "Road",
+    "S": "South",
+    "S.": "South",
+    "S.E.": "Southeast",
+    "SE": "Southeast",
+    "ST": "Street",
+    "SW": "Southwest",
+    "SW,": "Southwest",
+    "Se": "Southeast",
+    "southeast": "Southeast",
     "St": "Street",
-    "St.": "Street"
+    "st": "Street",
+    "street": "Street",
+    "St.": "Street",
+    "Ter": "Terrace",
+    "W": "West",
+    "west": "West",
+    "WA": "17625 140th Avenue Southeast",
+    "WA)": "US 101",
+    "WY": "Way"
 }
 
 
@@ -53,13 +96,17 @@ def audit(osmfile):
         if elem.tag == "node" or elem.tag == "way":
             for tag in elem.iter("tag"):
                 if is_street_name(tag):
-                    audit_street_type(street_types, tag.attrib('v'))
+                    audit_street_type(street_types, tag.attrib['v'])
     osm_file.close()
     return street_types
 
 
-def update_name(name, mapping):
-    # YOUR CODE HERE
+def update_name(name, _mapping):
+    n = street_type_re.search(name)
+    n = n.group()
+    for m in _mapping:
+        if n == m:
+            name = name[:-len(n)] + _mapping[m]
     return name
 
 
@@ -68,7 +115,7 @@ def test():
     assert len(st_types) == 3
     pprint.pprint(dict(st_types))
 
-    for st_type, ways in st_types.iteritems():
+    for st_type, ways in st_types.items():
         for name in ways:
             better_name = update_name(name, mapping)
             print(name, "=>", better_name)
