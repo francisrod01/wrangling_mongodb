@@ -97,10 +97,106 @@ problem_chars = re.compile(r'[=\+/&<>;\'"\?%#$@\,\. \t\r\n]')
 CREATED = ["version", "changeset", "timestamp", "user", "uid"]
 
 
-def share_element(element):
+# Helping for a solution:
+# https://discussions.udacity.com/t/preparing-for-database-mongodb-example/197866
+def shape_element(element):
     node = {}
+    my_temp_dictionary = {}
+    my_temp_address_dictionary = {}
+    node_refs_list = []
+    # pos_list = []
+    # initialize two element list
+    pos_list = [None for i in range(2)]
+
     if element.tag == "node" or element.tag == "way":
-        # YOUR CODE HERE
+        # used for development, testing
+        # if element.tag == "way" and element.attrib['id'] == '209809850' :
+        # used for development, testing
+        # if element.tag == "node" and element.attrib['id'] == '2406124091' :
+        # if element.tag == "way": # used for development, testing
+        node['type'] = element.tag
+        # print("element is {}".format(element))
+        # type(element) is <type 'Element'>
+        # print("type(element) is {}\n".format(type(element)))
+
+        # element.tag is way
+        # print("element.tag is {}".format(element.tag))
+        # print("type(element.tag) is {}\n".format(type(element.tag))) #str
+
+        # print("element.attrib is {}\n".format(element.attrib)) #
+        # print("type(element.attrib) is {}\n".format(type(element.attrib))) # Dictionary
+
+        # access the top level element.attrib dictionary
+        # print ("element.attrib[key] - {}\n".format(element.attrib[key]))
+        for key in element.attrib:
+
+            if key in CREATED:
+                # populate my_temp_dictionary with the key value pair from
+                # the element.attrib dictionary
+                # when the key is in the hard coded CREATED list
+                my_temp_dictionary[key] = element.attrib[key]
+                # populate the created dictionary nested within
+                # the node dictionary
+                node['created'] = my_temp_dictionary
+
+            elif key == 'lat':
+                pos_list[0] = float(element.attrib[key])
+                # print("lat type(element.attrib[key]) is {}".format(type(element.attrib[key])))
+                # print("lat type(pos_list[0]) is {}\n".format(type(pos_list[0])))
+                node['pos'] = pos_list
+
+            elif key == 'lon':
+                pos_list[1] = float(element.attrib[key])
+                # print("lon type(element.attrib[key]) is {}".format(type(element.attrib[key])))
+                # print("lon type(pos_list[1]) is {}\n".format(type(pos_list[1])))
+
+                node['pos'] = pos_list
+
+            else:
+                # populate the node dictionary
+                node[key] = element.attrib[key]
+
+        # access the nested elements
+        for secondLevelTag in element:
+            # print("secondLevelTag is {}".format(secondLevelTag))
+            # <type 'Element'>
+            # print("type(secondLevelTag) is {}".format(type(secondLevelTag)))
+
+            # print("secondLevelTag.attrib is {}".format(secondLevelTag.attrib))
+
+            for key in secondLevelTag.attrib:
+                # print("\tkey - {}, value - {}".format(key, secondLevelTag.attrib[key]))
+                if 'ref' in secondLevelTag.attrib:
+                    node_refs_list.append(secondLevelTag.attrib['ref'])
+                    node['node_refs'] = node_refs_list
+
+                elif 'k' in secondLevelTag.attrib:
+                    if 'addr:housenumber' == secondLevelTag.attrib['k']:
+                        my_temp_address_dictionary['housenumber'] = secondLevelTag.attrib['v'].strip()
+                        # print("secondLevelTag.attrib['v'] is {}".format(secondLevelTag.attrib['v']))
+                        # print("type(secondLevelTag.attrib['v']) is {}".format(type(secondLevelTag.attrib['v']))) # str
+                        node['address'] = my_temp_address_dictionary
+
+                    elif "addr:street" == secondLevelTag.attrib['k']:
+                        node['address']['street'] = secondLevelTag.attrib['v']
+
+                    elif "addr:postcode" == secondLevelTag.attrib['k']:
+                        node['address']['postcode'] = secondLevelTag.attrib['v']
+
+                    elif "amenity" == secondLevelTag.attrib['k']:
+                        node['amenity'] = secondLevelTag.attrib['v']
+
+                    elif "cuisine" == secondLevelTag.attrib['k']:
+                        node['cuisine'] = secondLevelTag.attrib['v']
+
+                    elif "name" == secondLevelTag.attrib['k']:
+                        node['name'] = secondLevelTag.attrib['v']
+
+                    elif "phone" == secondLevelTag.attrib['k']:
+                        node['phone'] = secondLevelTag.attrib['v']
+
+        # print("END THAT ELEMENT\n")
+
         return node
     else:
         return None
@@ -112,7 +208,7 @@ def process_map(file_in, pretty=False):
     data = []
     with codecs.open(file_out, "w") as fo:
         for _, element in et.iterparse(file_in):
-            el = share_element(element)
+            el = shape_element(element)
             if el:
                 data.append(el)
                 if pretty:
@@ -127,7 +223,8 @@ def test():
     # call the 'process_map' procedure with pretty=false. The pretty=true option adds
     # additional spaces to the output, making it significantly larger.
     data = process_map(dataset_file)
-    pprint.pprint(data)
+    # pprint.pprint(data)
+    # pprint.pprint(data[-1])
 
     correct_first_element = {
         "id": "261114295",
