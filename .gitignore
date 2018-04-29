@@ -3,4 +3,6 @@
 lesson 5/datasets/autos-*.csv
 lesson 5/datasets/*-autos.csv
 
+lesson 11/datasets/*-output.json
+
 */__pycache__/
